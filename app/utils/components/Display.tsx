@@ -225,9 +225,7 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
           </div>
           <div className="collapse-content">
             <h3 className="font-bold whitespace-nowrap">Mass concentration</h3>
-            <p>
-              Estimated (&mu;g/m&#179;)
-            </p>
+            <p>Estimated (&mu;g/m&#179;)</p>
           </div>
         </div>
         <div className="table flex flex-col w-full">

@@ -40,7 +40,7 @@ export const aqiFromPM = (pm: number | undefined): number | string => {
   return "-";
 };
 
-// data fetching functions below: 
+// data fetching functions below:
 
 const prisma = new PrismaClient();
 
@@ -74,7 +74,7 @@ async function saveSensorData(data: FetchedData): Promise<void> {
         outdoor_um_count_2_5: data.pubData.sensor["2.5_um_count"],
         outdoor_um_count_5_0: data.pubData.sensor["5.0_um_count"],
         outdoor_um_count_10_0: data.pubData.sensor["10.0_um_count"],
-        outdoor_time_stamp: data.pubData.sensor.last_seen
+        outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
     // console.log('Sensor data saved successfully.');
@@ -93,7 +93,7 @@ export async function getData(): Promise<FetchedData> {
       headers: {
         "X-API-KEY": `${process.env.READ_API_KEY}`,
       },
-      next: { revalidate: 120 }
+      next: { revalidate: 120 },
     }
   );
   if (!PrivAPIResults.ok) {
@@ -106,7 +106,7 @@ export async function getData(): Promise<FetchedData> {
       headers: {
         "X-API-KEY": `${process.env.READ_API_KEY}`,
       },
-      next: { revalidate: 120 }
+      next: { revalidate: 120 },
     }
   );
   if (!PubAPIResults.ok) {
@@ -120,9 +120,9 @@ export const fetchDataAndSave = async () => {
   try {
     const data = await getData();
     await saveSensorData(data);
-    console.log('Data fetched and saved successfully.');
+    console.log("Data fetched and saved successfully.");
     // return data as FetchedData;
   } catch (error) {
-    throw new Error("Error fetching and saving")
-  } 
+    throw new Error("Error fetching and saving");
+  }
 };

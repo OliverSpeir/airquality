@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^4.16.1",
