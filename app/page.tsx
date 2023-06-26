@@ -10,6 +10,7 @@ setInterval(fetchDataAndSave, 360 * 60 * 1000);
 
 export default async function Home() {
   let data = await getData();
+  fetchDataAndSave();
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="flex flex-wrap justify-center">

@@ -79,7 +79,7 @@ async function saveSensorData(data: FetchedData): Promise<void> {
     });
     // console.log('Sensor data saved successfully.');
   } catch (error) {
-    // console.error('Error saving sensor data. Probably unique constraint. ');
+    // console.error(error);
   } finally {
     await prisma.$disconnect();
   }
@@ -120,7 +120,7 @@ export const fetchDataAndSave = async () => {
   try {
     const data = await getData();
     await saveSensorData(data);
-    console.log("Data fetched and saved successfully.");
+    // console.log("Data fetched and saved successfully.");
     // return data as FetchedData;
   } catch (error) {
     throw new Error("Error fetching and saving");
