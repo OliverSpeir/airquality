@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SensorData {
+  id                 Int      @id @default(autoincrement())
+  indoor_humidity           Float
+  indoor_temperature        Float
+  indoor_pressure           Float
+  indoor_pm10_0             Float
+  indoor_pm25               Float
+  indoor_pm1                Float
+  indoor_um_count_0_3       Float
+  indoor_um_count_0_5       Float
+  indoor_um_count_1_0       Float
+  indoor_um_count_2_5       Float
+  indoor_um_count_5_0       Float
+  indoor_um_count_10_0      Float
+  indoor_time_stamp         Int      @unique
+  outdoor_humidity           Float
+  outdoor_temperature        Float
+  outdoor_pressure           Float
+  outdoor_pm10_0             Float
+  outdoor_pm25               Float
+  outdoor_pm1                Float
+  outdoor_um_count_0_3       Float
+  outdoor_um_count_0_5       Float
+  outdoor_um_count_1_0       Float
+  outdoor_um_count_2_5       Float
+  outdoor_um_count_5_0       Float
+  outdoor_um_count_10_0      Float
+  outdoor_time_stamp         Int      @unique
+}
