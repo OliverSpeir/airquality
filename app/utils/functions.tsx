@@ -77,9 +77,10 @@ async function saveSensorData(data: FetchedData): Promise<void> {
         outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
-    // console.log('Sensor data saved successfully.');
+    console.log('Saved.');
   } catch (error) {
     // console.error(error);
+    console.error("didnt save")
   } finally {
     await prisma.$disconnect();
   }
