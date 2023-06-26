@@ -20,10 +20,10 @@ export const TempAndHumidity = ({
           <div className="border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 whitespace-nowrap">
-                {new Date(data.time_stamp * 1000).toLocaleTimeString()}
+                {new Date(data.time_stamp * 1000).toLocaleTimeString('en-US', { timeZone: 'America/Denver' })}
               </div>
               <div className="p-2">
-                {new Date(data.time_stamp * 1000).toLocaleDateString()}
+                {new Date(data.time_stamp * 1000).toLocaleDateString('en-US', { timeZone: 'America/Denver' })}
               </div>
             </div>
           </div>
