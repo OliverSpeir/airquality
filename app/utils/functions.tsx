@@ -79,8 +79,8 @@ async function saveSensorData(data: FetchedData): Promise<void> {
     });
     console.log('Saved.');
   } catch (error) {
-    // console.error(error);
-    console.error("didnt save")
+    console.error(error);
+    // console.error("didnt save")
   } finally {
     await prisma.$disconnect();
   }
