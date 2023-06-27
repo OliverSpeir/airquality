@@ -16,8 +16,8 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <Info />
-      <div className="flex flex-wrap justify-center">
-        <div className="flex m-2">
+      <div className="md:flex flex-wrap justify-center">
+        <div className="md:flex m-2">
           <div className="flex-auto mx-2">
             <TempAndHumidity type={"Indoor"} data={data.privData} />
           </div>
@@ -25,7 +25,7 @@ export default async function Home() {
             <TempAndHumidity type={"Outdoor"} data={data.pubData} />
           </div>
         </div>
-        <div className="flex m-2">
+        <div className="md:flex m-2">
           <div className="flex-auto mx-2">
             <AllPMs type={"Indoor"} data={data.privData} />
           </div>
@@ -33,7 +33,7 @@ export default async function Home() {
             <AllPMs type={"Outdoor"} data={data.pubData} />
           </div>
         </div>
-        <div className="flex m-2">
+        <div className="md:flex m-2">
           <div className="flex-auto mx-2">
             <Counts type={"Indoor"} data={data.privData} />
           </div>
@@ -41,7 +41,7 @@ export default async function Home() {
             <Counts type={"Outdoor"} data={data.pubData} />
           </div>
         </div>
-        <div className="flex m-2">
+        <div className="md:flex m-2">
           <div className="flex-auto mx-2">
             <PM25 type={"Indoor"} data={data.privData} />
           </div>

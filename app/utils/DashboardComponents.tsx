@@ -8,7 +8,7 @@ export const Info = () => {
       <div className="collapse collapse-plus bg-base-100">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">More Info</div>
-        <div className="collapse-content flex justify-evenly">
+        <div className="collapse-content md:flex justify-evenly">
           <div className="card w-60 bg-secondary text-accent-content my-5 md:my-0 mx-5">
             <div className="card-body w-full">
               <div className="table flex flex-col w-full">
