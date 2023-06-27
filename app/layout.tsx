@@ -5,7 +5,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Sensor Dashboard",
-  description: "Log and view data from private and near by Purple Air Sensor",
+  description:
+    "Log and view data from private and nearby public Purple Air Sensor",
 };
 
 export default function RootLayout({

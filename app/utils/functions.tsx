@@ -77,7 +77,7 @@ async function saveSensorData(data: FetchedData): Promise<void> {
         outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
-    console.log('Saved.');
+    console.log("Saved.");
   } catch (error) {
     console.error(error);
     // console.error("didnt save")
