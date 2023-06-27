@@ -8,7 +8,7 @@ export const Info = () => {
       <div className="collapse collapse-plus bg-base-100">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">More Info</div>
-        <div className="collapse-content md:flex justify-evenly">
+        <div className="collapse-content flex flex-col justify-center items-center md:flex-row md:justify-evenly">
           <div className="card w-60 bg-secondary text-accent-content my-5 md:my-0 mx-5">
             <div className="card-body w-full">
               <div className="table flex flex-col w-full">
@@ -411,7 +411,7 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
       <div className="card-body w-full">
         <div className="collapse collapse-arrow -mt-6">
           <input type="checkbox" />
-          <div className="collapse-title -ml-3 font-bold text-md">
+          <div className="collapse-title --3 font-bold text-md">
             {type} Mass concentration
           </div>
           <div className="collapse-content">
