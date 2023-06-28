@@ -156,7 +156,7 @@ export const Info = () => {
                 {/* row 3 */}
                 <div className="border-b border-gray-200">
                   <div className="grid grid-cols-2 gap-4 rounded-lg">
-                    <div className="p-2 font-bold">Contact Me</div>
+                    <div className="p-2 font-bold">About Me</div>
                     <div className="p-2 whitespace-nowrap">
                       <a
                         href="https://www.oliverspeir.com"
