@@ -2,9 +2,9 @@
 
 This is a full stack web app that displays live data and logs it in a database.
 
-## Built with NextJS, React Server Components, Prisma and Supabase
+## Built with NextJS, Async React Components, Prisma and Supabase
 
-Uses RSC for Datafetching, Prisma as an ORM to interface with the PostgreSQL DB provided by Supabase. Supabase provides connection pooling via PgBouncer, which is important when using Serverless functions.
+Uses Async components for Datafetching, Prisma as an ORM to interface with the PostgreSQL DB provided by Supabase. Supabase provides connection pooling via PgBouncer, which is important when using Serverless functions.
 
 ## Styled with DaisyUI and TailwindCSS
 
@@ -17,6 +17,7 @@ I made this project to learn more about these technologies. I had a lot of fun d
 ## Resources
 
 - [React Server Components Explained](https://nextjs.org/docs/getting-started/react-essentials#server-components)
+- [Async Server Components Explained](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#async-and-await-in-server-components)
 - [Prisma with Vercel](https://www.prisma.io/docs/guides/deployment/deployment-guides/deploying-to-vercel)
 - [Supabase with Prisma](https://supabase.com/docs/guides/integrations/prisma)
 - [DaisyUI](https://daisyui.com)

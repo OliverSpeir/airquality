@@ -131,7 +131,6 @@ export const Info = () => {
                         target="_blank"
                         className="btn btn-error px-3 font-bold"
                       >
-                        {" "}
                         Link
                       </a>
                     </div>
@@ -147,7 +146,6 @@ export const Info = () => {
                         target="_blank"
                         className="btn btn-error px-3 font-bold"
                       >
-                        {" "}
                         Link
                       </a>
                     </div>
@@ -163,7 +161,6 @@ export const Info = () => {
                         target="_blank"
                         className="btn btn-error px-3 font-bold"
                       >
-                        {" "}
                         Link
                       </a>
                     </div>

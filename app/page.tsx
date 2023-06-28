@@ -9,7 +9,7 @@ import { getData, fetchDataAndSave } from "./utils/functions";
 
 setInterval(fetchDataAndSave, 360 * 60 * 1000);
 
-// async function here means it is a server component
+// async component
 export default async function Home() {
   let data = await getData();
   fetchDataAndSave();
