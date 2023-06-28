@@ -15,4 +15,13 @@ module.exports = {
     },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["corporate", {
+      dark: {
+        ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+        "accent": "#15803d",
+        "primary": "#1d4ed8",
+      },
+    },],
+  },
 };

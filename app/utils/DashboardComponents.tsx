@@ -9,7 +9,7 @@ export const Info = () => {
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">More Info</div>
         <div className="collapse-content flex flex-col justify-center items-center md:flex-row md:justify-evenly">
-          <div className="card w-60 bg-secondary text-accent-content my-5 md:my-0 mx-5">
+          <div className="card w-60 bg-secondary text-secondary-content my-5 md:my-0 mx-5">
             <div className="card-body w-full">
               <div className="table flex flex-col w-full">
                 {/* row 1 */}
@@ -256,7 +256,7 @@ export const PM25 = ({ data, type }: { data: Data; type: string }) => {
               Rolling average mass concentration estimated by PurpleAir fed into{" "}
               <a
                 href="https://community.purpleair.com/t/how-to-calculate-the-us-epa-pm2-5-aqi/877"
-                className="link-hover link-neutral"
+                className="link text-slate-900 hover:text-blue-900"
               >
                 {" "}
                 AQI Equation
@@ -345,7 +345,7 @@ export const Counts = ({ data, type }: { data: Data; type: string }) => {
         <div className="collapse collapse-arrow -mt-6">
           <input type="checkbox" />
           <div className="collapse-title font-bold text-lg">
-            {type} Count concentration
+            {type} Count Concentration
           </div>
           <div className="collapse-content">
             <p>(particles/100ml) of all particles greater than x diameter</p>
@@ -412,7 +412,7 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
         <div className="collapse collapse-arrow -mt-6">
           <input type="checkbox" />
           <div className="collapse-title --3 font-bold text-md">
-            {type} Mass concentration
+            {type} Mass Concentration
           </div>
           <div className="collapse-content">
             <p>Estimated (&mu;g/m&#179;)</p>
@@ -423,8 +423,8 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
           <div className="border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">1.0 &mu;m</div>
-              <div className="p-2 whitespace-nowrap">
-                {data.sensor["pm1.0"]} &mu;g/m&#179;
+              <div className="p-2 ">
+                {data.sensor["pm1.0"]}
               </div>
             </div>
           </div>
@@ -432,8 +432,8 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
           <div className="border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">2.5 &mu;m</div>
-              <div className="p-2 whitespace-nowrap">
-                {data.sensor["pm2.5"]} &mu;g/m&#179;
+              <div className="p-2 ">
+                {data.sensor["pm2.5"]}
               </div>
             </div>
           </div>
@@ -441,8 +441,8 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
           <div className="">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">10 &mu;m</div>
-              <div className="p-2 whitespace-nowrap">
-                {data.sensor["pm10.0"]} &mu;g/m&#179;
+              <div className="p-2 ">
+                {data.sensor["pm10.0"]}
               </div>
             </div>
           </div>
