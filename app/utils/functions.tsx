@@ -84,7 +84,6 @@ export const saveData = async () => {
   }
 };
 
-
 // AQI estimation function below: https://community.purpleair.com/t/how-to-calculate-the-us-epa-pm2-5-aqi/877
 const categories: AQICategory[] = [
   { name: "Good", range: [0, 50], pm: [0, 12] },
