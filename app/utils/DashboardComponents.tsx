@@ -420,27 +420,21 @@ export const AllPMs = ({ data, type }: { data: Data; type: string }) => {
           <div className="border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">1.0 &mu;m</div>
-              <div className="p-2 ">
-                {data.sensor["pm1.0"]}
-              </div>
+              <div className="p-2 ">{data.sensor["pm1.0"]}</div>
             </div>
           </div>
           {/* row 2 */}
           <div className="border-b border-gray-200">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">2.5 &mu;m</div>
-              <div className="p-2 ">
-                {data.sensor["pm2.5"]}
-              </div>
+              <div className="p-2 ">{data.sensor["pm2.5"]}</div>
             </div>
           </div>
           {/* row 3 */}
           <div className="">
             <div className="grid grid-cols-2 gap-4 hover:bg-gray-600 rounded-lg">
               <div className="p-2 font-bold">10 &mu;m</div>
-              <div className="p-2 ">
-                {data.sensor["pm10.0"]}
-              </div>
+              <div className="p-2 ">{data.sensor["pm10.0"]}</div>
             </div>
           </div>
         </div>

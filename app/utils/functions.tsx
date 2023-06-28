@@ -1,6 +1,90 @@
 import { AQICategory, FetchedData, Data } from "./types";
 import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
+
+async function saveSensorData(data: FetchedData): Promise<void> {
+  try {
+    await prisma.sensorData.create({
+      data: {
+        indoor_humidity: data.privData.sensor.humidity,
+        indoor_temperature: data.privData.sensor.temperature,
+        indoor_pressure: data.privData.sensor.pressure,
+        indoor_pm10_0: data.privData.sensor["pm10.0"],
+        indoor_pm25: data.privData.sensor["pm2.5"],
+        indoor_pm1: data.privData.sensor["pm1.0"],
+        indoor_um_count_0_3: data.privData.sensor["0.3_um_count"],
+        indoor_um_count_0_5: data.privData.sensor["0.5_um_count"],
+        indoor_um_count_1_0: data.privData.sensor["1.0_um_count"],
+        indoor_um_count_2_5: data.privData.sensor["2.5_um_count"],
+        indoor_um_count_5_0: data.privData.sensor["5.0_um_count"],
+        indoor_um_count_10_0: data.privData.sensor["10.0_um_count"],
+        indoor_time_stamp: data.privData.sensor.last_seen,
+        outdoor_humidity: data.pubData.sensor.humidity,
+        outdoor_temperature: data.pubData.sensor.temperature,
+        outdoor_pressure: data.pubData.sensor.pressure,
+        outdoor_pm10_0: data.pubData.sensor["pm10.0"],
+        outdoor_pm25: data.pubData.sensor["pm2.5"],
+        outdoor_pm1: data.pubData.sensor["pm1.0"],
+        outdoor_um_count_0_3: data.pubData.sensor["0.3_um_count"],
+        outdoor_um_count_0_5: data.pubData.sensor["0.5_um_count"],
+        outdoor_um_count_1_0: data.pubData.sensor["1.0_um_count"],
+        outdoor_um_count_2_5: data.pubData.sensor["2.5_um_count"],
+        outdoor_um_count_5_0: data.pubData.sensor["5.0_um_count"],
+        outdoor_um_count_10_0: data.pubData.sensor["10.0_um_count"],
+        outdoor_time_stamp: data.pubData.sensor.last_seen,
+      },
+    });
+  } catch (error) {
+    // console.error(error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+export async function getData(): Promise<FetchedData> {
+  const PrivAPIResults = await fetch(
+    `https://api.purpleair.com/v1/sensors/${process.env.SENSOR_INDEX}?read_key=${process.env.READ_KEY}`,
+    {
+      method: "GET",
+      headers: {
+        "X-API-KEY": `${process.env.READ_API_KEY}`,
+      },
+      next: { revalidate: 120 },
+    }
+  );
+  if (!PrivAPIResults.ok) {
+    throw new Error("Failed to fetch private data");
+  }
+  const PubAPIResults = await fetch(
+    `https://api.purpleair.com/v1/sensors/${process.env.PUBLIC_SENSOR_INDEX}`,
+    {
+      method: "GET",
+      headers: {
+        "X-API-KEY": `${process.env.READ_API_KEY}`,
+      },
+      next: { revalidate: 120 },
+    }
+  );
+  if (!PubAPIResults.ok) {
+    throw new Error("Failed to fetch public data");
+  }
+  const privData: Data = await PrivAPIResults.json();
+  const pubData: Data = await PubAPIResults.json();
+  return { privData, pubData };
+}
+
+// this exists for the purpose of the setInterval ( gets fresh data before it saves )
+export const saveData = async () => {
+  try {
+    const data = await getData();
+    await saveSensorData(data);
+  } catch (error) {
+    throw new Error("Error saving");
+  }
+};
+
+
 // AQI estimation function below: https://community.purpleair.com/t/how-to-calculate-the-us-epa-pm2-5-aqi/877
 const categories: AQICategory[] = [
   { name: "Good", range: [0, 50], pm: [0, 12] },
@@ -38,92 +122,4 @@ export const aqiFromPM = (pm: number | undefined): number | string => {
   }
 
   return "-";
-};
-
-// data fetching functions below:
-
-const prisma = new PrismaClient();
-
-async function saveSensorData(data: FetchedData): Promise<void> {
-  // const prisma = new PrismaClient();
-  try {
-    await prisma.sensorData.create({
-      data: {
-        indoor_humidity: data.privData.sensor.humidity,
-        indoor_temperature: data.privData.sensor.temperature,
-        indoor_pressure: data.privData.sensor.pressure,
-        indoor_pm10_0: data.privData.sensor["pm10.0"],
-        indoor_pm25: data.privData.sensor["pm2.5"],
-        indoor_pm1: data.privData.sensor["pm1.0"],
-        indoor_um_count_0_3: data.privData.sensor["0.3_um_count"],
-        indoor_um_count_0_5: data.privData.sensor["0.5_um_count"],
-        indoor_um_count_1_0: data.privData.sensor["1.0_um_count"],
-        indoor_um_count_2_5: data.privData.sensor["2.5_um_count"],
-        indoor_um_count_5_0: data.privData.sensor["5.0_um_count"],
-        indoor_um_count_10_0: data.privData.sensor["10.0_um_count"],
-        indoor_time_stamp: data.privData.sensor.last_seen,
-        outdoor_humidity: data.pubData.sensor.humidity,
-        outdoor_temperature: data.pubData.sensor.temperature,
-        outdoor_pressure: data.pubData.sensor.pressure,
-        outdoor_pm10_0: data.pubData.sensor["pm10.0"],
-        outdoor_pm25: data.pubData.sensor["pm2.5"],
-        outdoor_pm1: data.pubData.sensor["pm1.0"],
-        outdoor_um_count_0_3: data.pubData.sensor["0.3_um_count"],
-        outdoor_um_count_0_5: data.pubData.sensor["0.5_um_count"],
-        outdoor_um_count_1_0: data.pubData.sensor["1.0_um_count"],
-        outdoor_um_count_2_5: data.pubData.sensor["2.5_um_count"],
-        outdoor_um_count_5_0: data.pubData.sensor["5.0_um_count"],
-        outdoor_um_count_10_0: data.pubData.sensor["10.0_um_count"],
-        outdoor_time_stamp: data.pubData.sensor.last_seen,
-      },
-    });
-    console.log("Saved.");
-  } catch (error) {
-    console.error(error);
-    // console.error("didnt save")
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
-export async function getData(): Promise<FetchedData> {
-  const PrivAPIResults = await fetch(
-    `https://api.purpleair.com/v1/sensors/${process.env.SENSOR_INDEX}?read_key=${process.env.READ_KEY}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": `${process.env.READ_API_KEY}`,
-      },
-      next: { revalidate: 120 },
-    }
-  );
-  if (!PrivAPIResults.ok) {
-    throw new Error("Failed to fetch private data");
-  }
-  const PubAPIResults = await fetch(
-    `https://api.purpleair.com/v1/sensors/${process.env.PUBLIC_SENSOR_INDEX}`,
-    {
-      method: "GET",
-      headers: {
-        "X-API-KEY": `${process.env.READ_API_KEY}`,
-      },
-      next: { revalidate: 120 },
-    }
-  );
-  if (!PubAPIResults.ok) {
-    throw new Error("Failed to fetch private data");
-  }
-  const privData: Data = await PrivAPIResults.json();
-  const pubData: Data = await PubAPIResults.json();
-  return { privData, pubData };
-}
-export const fetchDataAndSave = async () => {
-  try {
-    const data = await getData();
-    await saveSensorData(data);
-    // console.log("Data fetched and saved successfully.");
-    // return data as FetchedData;
-  } catch (error) {
-    throw new Error("Error fetching and saving");
-  }
 };
