@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function saveSensorData(data: FetchedData): Promise<void> {
+async function saveSensorData(data: FetchedData): Promise<boolean> {
   try {
     await prisma.sensorData.create({
       data: {
@@ -35,8 +35,10 @@ async function saveSensorData(data: FetchedData): Promise<void> {
         outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
+    return true;
   } catch (error) {
-    // console.error(error);
+    console.error(error);
+    return false;
   } finally {
     await prisma.$disconnect();
   }
@@ -78,8 +80,8 @@ export async function getData(): Promise<FetchedData> {
 export const saveData = async () => {
   try {
     const data = await getData();
-    await saveSensorData(data);
-    return data
+    const success = await saveSensorData(data);
+    return {data, success}
   } catch (error) {
     throw new Error("Error saving");
   }
