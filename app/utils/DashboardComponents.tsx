@@ -3,7 +3,6 @@ import { aqiFromPM } from "./functions";
 import Image from "next/image";
 
 export const Info = () => {
-  "use client"
   return (
     <>
       <div className="collapse collapse-plus bg-base-100">
