@@ -3,6 +3,7 @@ import { aqiFromPM } from "./functions";
 import Image from "next/image";
 
 export const Info = () => {
+  "use client"
   return (
     <>
       <div className="collapse collapse-plus bg-base-100">
@@ -127,7 +128,7 @@ export const Info = () => {
                     <div className="p-2 font-bold">PA API Docs</div>
                     <div className="p-2 whitespace-nowrap">
                       <a
-                        href="https://api.purpleair.com/#api-sensors-get-sensors-data"
+                        href="https://api.purpleair.com/#api-sensors-get-sensor-data"
                         target="_blank"
                         className="btn btn-error px-3 font-bold"
                       >

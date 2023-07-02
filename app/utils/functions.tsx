@@ -79,6 +79,7 @@ export const saveData = async () => {
   try {
     const data = await getData();
     await saveSensorData(data);
+    console.log("saved data")
   } catch (error) {
     throw new Error("Error saving");
   }
