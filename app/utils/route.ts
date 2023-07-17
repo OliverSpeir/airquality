@@ -13,5 +13,5 @@ export async function GET() {
   ).toLocaleString("en-US", {
     timeZone: "America/Denver",
   });
-  return NextResponse.json({ indoor_time_stamp, outdoor_time_stamp, succes: data.success });
+  return NextResponse.json({ indoor_time_stamp, outdoor_time_stamp, success: data.success.success, id: data.success.data?.id, error: data.success.error});
 }

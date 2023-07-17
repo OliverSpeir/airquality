@@ -3,9 +3,43 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function saveSensorData(data: FetchedData): Promise<boolean> {
+export type SavedReponse = {
+  success: boolean;
+  data?: {
+    id: number,
+    indoor_temperature: number,
+    indoor_humidity: number,
+    indoor_pressure: number,
+    indoor_pm10_0: number,
+    indoor_pm25: number,
+    indoor_pm1: number,
+    indoor_um_count_0_3: number,
+    indoor_um_count_0_5: number,
+    indoor_um_count_1_0: number,
+    indoor_um_count_2_5: number,
+    indoor_um_count_5_0: number,
+    indoor_um_count_10_0: number,
+    indoor_time_stamp: number,
+    outdoor_humidity: number,
+    outdoor_temperature: number,
+    outdoor_pressure: number,
+    outdoor_pm10_0: number,
+    outdoor_pm25: number,
+    outdoor_pm1: number,
+    outdoor_um_count_0_3: number,
+    outdoor_um_count_0_5: number,
+    outdoor_um_count_1_0: number,
+    outdoor_um_count_2_5: number,
+    outdoor_um_count_5_0: number,
+    outdoor_um_count_10_0: number,
+    outdoor_time_stamp: number
+  };
+  error?: string;
+}
+
+async function saveSensorData(data: FetchedData): Promise<SavedReponse> {
   try {
-    await prisma.sensorData.create({
+    const saved = await prisma.sensorData.create({
       data: {
         indoor_humidity: data.privData.sensor.humidity,
         indoor_temperature: data.privData.sensor.temperature,
@@ -35,10 +69,10 @@ async function saveSensorData(data: FetchedData): Promise<boolean> {
         outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
-    return true;
+    return { success: true, data: saved };
   } catch (error) {
     console.error(error);
-    return false;
+    return { success: false, error: (error as Error).message };
   } finally {
     await prisma.$disconnect();
   }
