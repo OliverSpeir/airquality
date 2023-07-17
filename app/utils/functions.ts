@@ -87,7 +87,7 @@ export async function getData(): Promise<FetchedData> {
       headers: {
         "X-API-KEY": `${process.env.READ_API_KEY}`,
       },
-      next: { revalidate: 0 },
+      cache: 'no-store',
     }
   );
   if (!PrivAPIResults.ok) {
@@ -100,7 +100,7 @@ export async function getData(): Promise<FetchedData> {
       headers: {
         "X-API-KEY": `${process.env.READ_API_KEY}`,
       },
-      next: { revalidate: 0 },
+      cache: 'no-store',
     }
   );
   if (!PubAPIResults.ok) {
