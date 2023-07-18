@@ -69,10 +69,8 @@ async function saveSensorData(data: FetchedData): Promise<SavedReponse> {
         outdoor_time_stamp: data.pubData.sensor.last_seen,
       },
     });
-    console.log(saved.id)
     return { success: true, data: saved };
   } catch (error) {
-    console.error(error);
     return { success: false, error: (error as Error).message };
   } finally {
     await prisma.$disconnect();
@@ -108,7 +106,6 @@ export async function getData(): Promise<FetchedData> {
   }
   const privData: Data = await PrivAPIResults.json();
   const pubData: Data = await PubAPIResults.json();
-  console.log("fetched data from api")
   return { privData, pubData };
 }
 

@@ -13,5 +13,14 @@ export async function GET() {
   ).toLocaleString("en-US", {
     timeZone: "America/Denver",
   });
-  return NextResponse.json({ indoor_time_stamp, outdoor_time_stamp, success: data.success.success, id: data.success.data?.id, error: data.success.error});
+  // return NextResponse.json({ indoor_time_stamp, outdoor_time_stamp, success: data.success.success, id: data.success.data?.id, error: data.success.error});
+  const res = NextResponse.json({
+    indoor_time_stamp,
+    outdoor_time_stamp,
+    success: data.success.success,
+    id: data.success.data?.id,
+    error: data.success.error,
+  });
+  res.headers.set("cache-control", "no-store");
+  return res;
 }
