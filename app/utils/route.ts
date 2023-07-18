@@ -1,6 +1,8 @@
 import { saveData } from "./functions";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export async function GET() {
   const data = await saveData();
   const indoor_time_stamp = new Date(
